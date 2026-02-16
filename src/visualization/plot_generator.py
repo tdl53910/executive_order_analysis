@@ -468,6 +468,8 @@ class PlotGenerator:
             return
 
         plot_df['year_num'] = plot_df['year_num'].astype(int)
+        plot_df = plot_df.sort_values('year_num').reset_index(drop=True)
+        year_order = sorted(plot_df['year_num'].unique().tolist())
 
         hover_cols = [c for c in ['filename', 'eo_number', 'president'] if c in plot_df.columns]
 
@@ -480,7 +482,8 @@ class PlotGenerator:
             hover_data=hover_cols,
             title='Executive Orders Evolution Over Time',
             labels={'x': 'Component 1', 'y': 'Component 2', 'year_num': 'Year'},
-            color_discrete_map=self.president_colors
+            color_discrete_map=self.president_colors,
+            category_orders={'year_num': year_order}
         )
 
         fig.update_traces(marker=dict(size=8, opacity=0.75))
