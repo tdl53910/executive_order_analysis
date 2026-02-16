@@ -1,111 +1,124 @@
-# Executive Order Analysis: AI-Powered Semantic Analysis of Presidential Directives
+# Executive Order Analysis
 
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Executive Order Analysis is an end-to-end NLP and machine learning project that examines how U.S. presidential executive order language has evolved over time. The system collects executive orders, converts them into semantic embeddings, identifies latent structure with dimensionality reduction and clustering, and publishes both static and interactive visualizations for exploration.
 
-## Live Interactive Results
+## Live Website
 
-Your GitHub Pages site is available at:
+Explore the published interactive outputs here:
 
 **https://tdl53910.github.io/executive_order_analysis/**
 
-It may take 2–3 minutes after pushing for updates to appear.
+Direct links:
+- Interactive time-series plot: https://tdl53910.github.io/executive_order_analysis/interactive_plot.html
+- Timeline animation: https://tdl53910.github.io/executive_order_analysis/timeline_animation.html
 
-### Direct links
-- **Main site**: https://tdl53910.github.io/executive_order_analysis/
-- **Interactive plot**: https://tdl53910.github.io/executive_order_analysis/interactive_plot.html
-- **Timeline animation**: https://tdl53910.github.io/executive_order_analysis/timeline_animation.html
-- **Static image example**: https://tdl53910.github.io/executive_order_analysis/pca_by_president.png
+## What This Project Does
 
-### Check Pages status
-1. Open: https://github.com/tdl53910/executive_order_analysis
-2. Go to **Settings** → **Pages**
-3. Confirm the message: _"Your site is live at https://tdl53910.github.io/executive_order_analysis/"_
+This repository provides a reproducible analysis pipeline for executive orders from recent U.S. administrations. It is designed to answer questions such as:
+- How has executive order language shifted semantically over time?
+- Do orders cluster into distinct policy/administrative patterns?
+- How do presidential eras differ in semantic space?
+- Is there measurable year-over-year semantic drift?
 
-## Overview
+The analysis is automated and can be rerun as new executive orders are published.
 
-This project applies NLP and machine learning to analyze the semantic evolution of U.S. executive orders across administrations.
+## Core Capabilities
 
-Core pipeline:
-- Scrape executive orders from the Federal Register API
-- Clean and preprocess text
-- Generate sentence embeddings (all-MiniLM-L6-v2)
-- Reduce dimensionality (PCA, t-SNE, UMAP)
-- Run clustering and drift analysis
-- Produce static and interactive visualizations
+- **Automated data collection** from the Federal Register API
+- **Text preprocessing** for normalization and analysis readiness
+- **Sentence embedding generation** using `all-MiniLM-L6-v2`
+- **Dimensionality reduction** with PCA, t-SNE, and UMAP
+- **Cluster analysis** with K-means and DBSCAN
+- **Semantic drift tracking** across years and presidential periods
+- **Interactive visual analytics** (HTML/Plotly) and publication-ready static plots
 
-## Repository Structure
+## How the Pipeline Works
+
+1. **Scrape** executive order documents and metadata.
+2. **Preprocess** text content.
+3. **Embed** each document into a dense semantic vector.
+4. **Reduce dimensions** for interpretable structure and plotting.
+5. **Cluster** documents to identify broad semantic groupings.
+6. **Visualize** trends, trajectories, and cluster composition.
+7. **Publish** outputs to GitHub Pages.
+
+The main entry point is:
+
+`scripts/run_analysis.py`
+
+## Configuration and Parameters
+
+Project behavior is controlled through `config.yaml`. Typical parameter groups include:
+
+- **Scraping parameters**
+  - `start_year`, `end_year`
+  - API query limits and output directories
+- **Embedding parameters**
+  - model path/name
+  - batch size and caching options
+- **Reduction parameters**
+  - PCA dimensions and variance tracking
+  - t-SNE `perplexity` and iteration count
+  - UMAP `n_neighbors`, `min_dist`, and random seed
+- **Clustering parameters**
+  - candidate `k` range for K-means
+  - DBSCAN epsilon/min samples
+- **Visualization parameters**
+  - style, figure size, DPI
+  - president color mapping
+
+These settings make it easy to rerun the same workflow for different time windows or tuning assumptions.
+
+## Outputs
+
+Generated artifacts are saved under `output/plots/` and typically include:
+
+- president-based and cluster-based scatter plots
+- semantic trend and variance plots
+- cluster composition heatmap
+- interactive HTML visualizations
+- timeline and trajectory views showing temporal change
+
+For web publishing, selected `.html` and `.png` outputs are copied into the Pages publish folder.
+
+## Repository Layout
 
 ```text
 executive_order_analysis/
-├── docs/                         # GitHub Pages publish folder
-├── output/plots/                 # Generated plots and interactive HTML files
-├── scripts/
-│   ├── run_analysis.py           # Main pipeline
-│   ├── download_models.py
-│   └── export_results.py
-├── src/
-│   ├── scraper/
-│   ├── preprocessing/
-│   ├── embeddings/
-│   ├── analysis/
-│   └── visualization/
-├── config.yaml
-├── requirements.txt
+├── scripts/              # Pipeline entry points and utilities
+├── src/                  # Scraping, preprocessing, embeddings, analysis, visualization
+├── output/plots/         # Generated plots and interactive HTML files
+├── docs/                 # GitHub Pages publish artifacts
+├── config.yaml           # Pipeline configuration
 └── README.md
 ```
 
-## Installation
+## Running Locally
+
+1. Create and activate a virtual environment
+2. Install dependencies
+3. Run the pipeline
+
+Example:
 
 ```bash
-git clone https://github.com/tdl53910/executive_order_analysis.git
-cd executive_order_analysis
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-```
-
-## Run the pipeline
-
-```bash
-source venv/bin/activate
 python scripts/run_analysis.py
 ```
 
-## Open local outputs
+To open generated visualizations locally (macOS):
 
 ```bash
 open output/plots/interactive_plot.html
 open output/plots/timeline_animation.html
-open output/plots/president_panels.png
-open output/plots/centroid_trajectory.png
 ```
 
-## Publish latest plots to GitHub Pages
+## Publishing Updated Visualizations
 
-If your Pages source is the repository root (or `/docs`), copy generated files to the publish location and push:
-
-```bash
-cp output/plots/*.html docs/
-cp output/plots/*.png docs/
-git add docs
-git commit -m "Update published visualizations"
-git push
-```
-
-## Notes
-
-- `urllib3` LibreSSL warning on macOS system Python is non-fatal for this workflow.
-- If metadata and embeddings differ in length, the pipeline now truncates safely to aligned rows.
-
-## Citation
-
-```text
-Eappen, J. & Lent, T. (2026). Executive Order Analysis: AI-Powered Semantic
-Analysis of Presidential Directives. GitHub.
-https://github.com/tdl53910/executive_order_analysis
-```
+After regenerating outputs, publish refreshed visualizations to GitHub Pages by copying artifacts into the configured publish directory and pushing to GitHub.
 
 ## License
 
-MIT License (see `LICENSE`).
+MIT License.
