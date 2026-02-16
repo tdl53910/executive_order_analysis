@@ -1,49 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Executive Order Analysis</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+    h1 { margin: 0 0 8px; font-size: 1.9rem; }
+    p.lead { margin: 0 0 20px; color: var(--muted); }
+    h2 { margin: 24px 0 12px; font-size: 1.25rem; }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .link-card, .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .link-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .link-card a:hover { text-decoration: underline; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: zoom-in;
+      display: block;
+    }
+    .note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Executive Order Analysis</h1>
+    <p class="lead">Interactive and static visualizations of semantic trends in U.S. executive orders.</p>
+
+    <h2>Interactive Visualizations</h2>
+    <div class="links">
+      <div class="link-card">
+        <a href="interactive_plot.html" target="_blank" rel="noopener noreferrer">Open Interactive Time-Series Plot</a>
+        <p class="note">Year on x-axis with semantic components over time.</p>
+      </div>
+      <div class="link-card">
+        <a href="timeline_animation.html" target="_blank" rel="noopener noreferrer">Open Timeline Animation</a>
+        <p class="note">Animated year-by-year semantic evolution.</p>
+      </div>
+    </div>
+
     <h2>Static Visualizations</h2>
     <div class="grid">
-        <div class="card">
-            <h3>PCA by President</h3>
-            <a href="pca_by_president.png"><img src="pca_by_president.png"></a>
-            <p>PCA projection colored by president</p>
-        </div>
-        <div class="card">
-            <h3>t-SNE by President</h3>
-            <a href="tsne_by_president.png"><img src="tsne_by_president.png"></a>
-            <p>t-SNE projection showing cluster patterns</p>
-        </div>
-        <div class="card">
-            <h3>UMAP by President</h3>
-            <a href="umap_by_president.png"><img src="umap_by_president.png"></a>
-            <p>UMAP dimensionality reduction</p>
-        </div>
-        <div class="card">
-            <h3>Centroid Trajectory</h3>
-            <a href="centroid_trajectory.png"><img src="centroid_trajectory.png"></a>
-            <p>Semantic center of gravity over time</p>
-        </div>
-        <div class="card">
-            <h3>President Panels</h3>
-            <a href="president_panels.png"><img src="president_panels.png"></a>
-            <p>Each president's semantic space</p>
-        </div>
-        <div class="card">
-            <h3>Cluster Composition</h3>
-            <a href="cluster_composition.png"><img src="cluster_composition.png"></a>
-            <p>How orders cluster by president</p>
-        </div>
-        <div class="card">
-            <h3>PCA Clusters</h3>
-            <a href="pca_clusters.png"><img src="pca_clusters.png"></a>
-            <p>K-means clusters in PCA space</p>
-        </div>
-        <div class="card">
-            <h3>PCA Variance</h3>
-            <a href="pca_variance.png"><img src="pca_variance.png"></a>
-            <p>Explained variance by component</p>
-        </div>
-        <div class="card">
-            <h3>Semantic Trend</h3>
-            <a href="semantic_trend.png"><img src="semantic_trend.png"></a>
-            <p>Semantic drift over time (PC1/PC2)</p>
-        </div>
+      <div class="card">
+        <h3>PCA by President</h3>
+        <img src="pca_by_president.png" alt="PCA by President" onclick="window.open('pca_by_president.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>t-SNE by President</h3>
+        <img src="tsne_by_president.png" alt="t-SNE by President" onclick="window.open('tsne_by_president.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>UMAP by President</h3>
+        <img src="umap_by_president.png" alt="UMAP by President" onclick="window.open('umap_by_president.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>PCA Clusters</h3>
+        <img src="pca_clusters.png" alt="PCA Clusters" onclick="window.open('pca_clusters.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>Cluster Composition</h3>
+        <img src="cluster_composition.png" alt="Cluster Composition" onclick="window.open('cluster_composition.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>PCA Variance</h3>
+        <img src="pca_variance.png" alt="PCA Variance" onclick="window.open('pca_variance.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>Semantic Trend</h3>
+        <img src="semantic_trend.png" alt="Semantic Trend" onclick="window.open('semantic_trend.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>President Panels</h3>
+        <img src="president_panels.png" alt="President Panels" onclick="window.open('president_panels.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
+      <div class="card">
+        <h3>Centroid Trajectory</h3>
+        <img src="centroid_trajectory.png" alt="Centroid Trajectory" onclick="window.open('centroid_trajectory.png','_blank')" loading="lazy" />
+        <p class="note">Click image to open full size.</p>
+      </div>
     </div>
-    
+
+    <footer>
+      If updates are not visible, hard-refresh your browser and wait a few minutes for GitHub Pages deployment.
+    </footer>
+  </div>
+</body>
+</html>
