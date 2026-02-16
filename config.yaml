@@ -1,0 +1,51 @@
+# config.yaml - Updated with caching configuration
+data:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  embeddings_dir: "data/embeddings"
+  output_dir: "output/plots"
+  cache_dir: ".cache"  # Local cache directory
+  
+scraping:
+  start_year: 1994
+  end_year: 2025
+  batch_size: 1000
+  delay: 1.0  # seconds between requests
+  max_retries: 3
+  use_cache: true  # Cache API responses
+  cache_expiry_days: 30  # How long to keep cached responses
+  
+preprocessing:
+  min_word_length: 3
+  remove_stopwords: true
+  use_lemmatization: true
+  max_text_length: 5000  # characters to process
+  cache_processed: true  # Save processed texts
+  
+embeddings:
+  model_name: "all-MiniLM-L6-v2"  # Sentence transformer model
+  model_cache_dir: "models"  # Local directory for model files
+  batch_size: 32
+  max_length: 512
+  use_gpu: false
+  cache_embeddings: true  # Save embeddings to disk
+  
+analysis:
+  pca_components: 50
+  tsne_perplexity: 30
+  tsne_iterations: 1000
+  umap_neighbors: 15
+  umap_min_dist: 0.1
+  n_clusters: 5
+  cache_results: true  # Save analysis results
+  
+visualization:
+  figure_size: [12, 8]
+  dpi: 300
+  style: "seaborn-v0_8-darkgrid"
+  president_colors:
+    Clinton: "#0072B2"
+    Bush: "#E69F00"
+    Obama: "#009E73"
+    Trump: "#CC79A7"
+    Biden: "#D55E00"
